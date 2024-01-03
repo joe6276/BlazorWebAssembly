@@ -1,0 +1,95 @@
+﻿@page "/home"
+
+
+@if (products.Count == 0)
+{
+    //empty
+    <p> No Products Found</p>
+}
+else
+{ 
+    <button @onclick="addProduct">Generate New Product</button>
+
+    <input type="text" @bind-value="name" >
+    <p>@name</p>
+
+    <input type="checkbox" @bind-value="showProduct" />
+
+    <p>@showProduct</p>
+    <div class="row">
+
+    @foreach(var product in products)
+    {
+
+                <div class="card shadow col-4 p-4" style="width: 18rem;">
+                <img src="@product.Image" class="card-img-top" alt="@product.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    
+                    <div class="d-flex justify-content-between">
+                        <span>
+                            @product.Description
+                        </span>
+                        <span>
+                           @product.Price
+                        </span>
+                    </div>
+                </div>
+            </div>
+      
+
+    }
+
+    </div>
+}
+
+@code{
+
+    public bool showProduct { get; set; }
+
+    public string name { get; set; } = "John Doe";
+
+    public List<Product> products = new List<Product>()
+    {
+        new Product()
+        {
+            Id=1,
+            Name="Monitor",
+            Description="BEst Dell Monitor",
+            Price=1000,
+            Image="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_640.jpg"
+        }
+        ,
+        new Product()
+        {
+            Id=2,
+            Name="Keyboard",
+            Description="Best Logi Keyboard",
+            Price=500,
+            Image="https://cdn.pixabay.com/photo/2012/12/17/19/14/keyboard-70506_640.jpg"
+        },
+
+        new Product()
+        {
+            Id=3,
+            Name="Laptop",
+            Description="BEst laptop",
+            Price=6000,
+            Image="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg"
+        }
+    };
+
+    public void addProduct()
+    {
+        var prod=new Product()
+            {
+                Id = 1,
+                Name = "Monitor",
+                Description = "BEst Dell Monitor",
+                Price = 1000,
+                Image = "https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_640.jpg"
+            };
+
+        products.Add(prod);
+    }
+}

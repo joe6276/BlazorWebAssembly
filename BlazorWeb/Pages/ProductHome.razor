@@ -1,0 +1,57 @@
+﻿
+@page "/"
+
+<div class="row">
+    
+    <div class="col-4">
+        <AddProduct OnAddProduct="AddProduct"></AddProduct>
+    </div>
+
+    <div class="col-8">
+      <div class="row">
+        @foreach(var product in products){
+            <SingleProduct product="product"></SingleProduct>
+        }
+        </div>
+    </div>
+</div>
+
+@code {
+
+    public List<Product> products = new List<Product>()
+    {
+        new Product()
+        {
+            Id=1,
+            Name="Monitor",
+            Description="BEst Dell Monitor",
+            Price=1000,
+            Image="https://cdn.pixabay.com/photo/2016/11/29/08/41/apple-1868496_640.jpg"
+        }
+        ,
+        new Product()
+        {
+            Id=2,
+            Name="Keyboard",
+            Description="Best Logi Keyboard",
+            Price=500,
+            Image="https://cdn.pixabay.com/photo/2012/12/17/19/14/keyboard-70506_640.jpg"
+        },
+
+        new Product()
+        {
+            Id=3,
+            Name="Laptop",
+            Description="BEst laptop",
+            Price=6000,
+            Image="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg"
+        }
+    };
+
+    public void AddProduct(Product newproduct)
+    {
+        newproduct.Id = products.count + 1;
+        products.Add(newproduct);
+    }
+
+}

@@ -1,0 +1,44 @@
+﻿<div class="row">
+    <img src="@(string.IsNullOrWhiteSpace(product.Image)? 
+"https://cdn.pixabay.com/photo/2015/01/21/14/14/imac-606765_640.jpg":product.Image)"/>
+</div>
+
+<div class="row">
+    <h1> Add New Product</h1>
+    <div class="form-group">
+        <label for="Name">Name</label>
+        <input type="text" class="form-control" @bind-value="product.Name"  id="Name" placeholder="Product Name">
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description</label>
+        <input type="text" class="form-control" @bind-value="product.Description" id="Description" placeholder="Product Description">
+    </div>
+
+    <div class="form-group">
+        <label for="Image">Image</label>
+        <input type="text" class="form-control" @bind-value="product.Image"  id="Image" placeholder="Product Image">
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input type="number" class="form-control" @bind-value="product.Price" id="Price" placeholder="Product Price">
+    </div>
+
+    <button  @onclick="addNewProduct" class="mt-4 btn btn-primary">Submit</button>
+</div>
+
+
+
+@code {
+
+    public Product product { get; set; } = new Product();
+
+    [Parameter]
+    public EventCallback<Product> OnAddProduct { get; set; }
+
+    public async Task addNewProduct()
+    {
+        await OnAddProduct.InvokeAsync(product);
+    }
+}

@@ -1,0 +1,24 @@
+﻿
+<div class="card shadow col-4 p-4" style="width: 18rem;">
+    <img src="@product.Image" class="card-img-top" alt="@product.Name">
+    <div class="card-body">
+        <h5 class="card-title">@product.Name</h5>
+
+        <div class="d-flex justify-content-between">
+            <span>
+                @product.Description
+            </span>
+            <span>
+                @product.Price
+            </span>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+
+    public Product product { get; set; } = default!; //in future a product will be passed 
+}
